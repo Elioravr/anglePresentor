@@ -6,7 +6,9 @@ $.widget("custom.anglePresentor", {
     mainContainerBackgroundBorderColor: '#333',
     mainContainerBackground: '#ccc',
     valuePointsBackground: 'red',
-    valuePointsBorderColor: '#333'
+    valuePointsBorderColor: '#333',
+    selectedAreaBackground: '#777',
+    selectedAreaBorderColor: '#333',
   },
   _create: function () {
     this._validateOptions()
@@ -21,6 +23,7 @@ $.widget("custom.anglePresentor", {
 
     this._initConsts()
     this._initAnglesContainer()
+    this._initValuesAnglesContainer()
     this._initValueCircle(this.options.minValue)
     this._initValueCircle(this.options.maxValue)
 
@@ -72,6 +75,17 @@ $.widget("custom.anglePresentor", {
 
     this._drawCircle(backgroundColor, borderColor, x, y, radius, startPoint, endPoint)
   },
+  _initValuesAnglesContainer: function () {
+    var backgroundColor = this.options.selectedAreaBackground
+    var borderColor = this.options.selectedAreaBorderColor
+    var x = this.CENTER_POINT_X
+    var y = this.CENTER_POINT_Y
+    var radius = this.BIGGEST_RADIUS
+    var startPoint = this._toRadians(this.options.minValue)
+    var endPoint = this._toRadians(this.options.maxValue)
+
+    this._drawCircle(backgroundColor, borderColor, x, y, radius, startPoint, endPoint)
+  },
   _initLabels: function (x, y, text) {
     var fontSize = 15;
     var labelsPadding = 10;
@@ -89,8 +103,8 @@ $.widget("custom.anglePresentor", {
     var dimensions = this.options.dimensions
     var backgroundColor = this.options.valuePointsBackground
     var borderColor = this.options.valuePointsBorderColor
-    var x = Math.cos(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_X
-    var y = Math.sin(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_Y
+    var x = this._getXFromAngle(angle)
+    var y = this._getYFromAngle(angle)
 
     var radius = 8;
     if (this.DIMENSIONS > 500) {
@@ -116,6 +130,12 @@ $.widget("custom.anglePresentor", {
     this._c.closePath()
     this._c.fill();
     this._c.stroke();
+  },
+  _getXFromAngle(angle) {
+    return Math.cos(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_X
+  },
+  _getYFromAngle(angle) {
+    return Math.sin(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_Y
   },
   _toRadians: function (angle) {
     return angle * (Math.PI / 180);

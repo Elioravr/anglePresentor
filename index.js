@@ -4,7 +4,13 @@ function initAnglePresentor() {
     minPosibleValue: $('#minPosibleValue').val(),
     maxPosibleValue: $('#maxPosibleValue').val(),
     minValue: $('#minValue').val(),
-    maxValue: $('#maxValue').val()
+    maxValue: $('#maxValue').val(),
+    mainContainerBackgroundBorderColor: $('#mainContainerBackgroundBorderColor').val(),
+    mainContainerBackground: $('#mainContainerBackground').val(),
+    valuePointsBackground: $('#valuePointsBackground').val(),
+    valuePointsBorderColor: $('#valuePointsBorderColor').val(),
+    selectedAreaBackground: $('#selectedAreaBackground').val(),
+    selectedAreaBorderColor: $('#selectedAreaBorderColor').val()
   })
 }
 

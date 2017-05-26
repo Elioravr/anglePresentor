@@ -13,15 +13,11 @@ input {
 .form {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 50%;
 }
 
 .form .field-container {
-  margin: 0 20px;
-}
-
-@media only screen and (max-width: 1440px) {
-  body {
-    flex-direction: column;
-  }
+  margin: 5px;
 }
