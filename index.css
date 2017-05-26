@@ -23,7 +23,11 @@ input {
 .content {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.example {
+  text-align: center;
 }
 
 .form {
@@ -36,6 +40,14 @@ input {
 
 .form .field-container {
   margin: 5px;
+}
+
+pre {
+  color: #65a768;
+  background-color: #545;
+  padding: 5px;
+  border-radius: 3px;
+  text-align: left;
 }
 
 @media screen and (max-width: 768px) {

@@ -4,6 +4,26 @@ function isMobile() {
   return check;
 }
 
+function initCodeSample() {
+  var code = ""
+  code += "$('.angle-presentor').anglePresentor({\n" +
+          "  dimensions: " + $('#dimensions').val() + ",\n" +
+          "  minPosibleValue: " + $('#minPosibleValue').val() + ",\n" +
+          "  maxPosibleValue: " + $('#maxPosibleValue').val() + ",\n" +
+          "  minValue: " + $('#minValue').val() + ",\n" +
+          "  maxValue: " + $('#maxValue').val() + ",\n" +
+          "  mainContainerBorderColor: '" + $('#mainContainerBorderColor').val() + "',\n" +
+          "  mainContainerBackground: '" + $('#mainContainerBackground').val() + "',\n" +
+          "  valuePointsBackground: '" + $('#valuePointsBackground').val() + "',\n" +
+          "  valuePointsBorderColor: '" + $('#valuePointsBorderColor').val() + "',\n" +
+          "  selectedAreaBackground: '" + $('#selectedAreaBackground').val() + "',\n" +
+          "  selectedAreaBorderColor: '" + $('#selectedAreaBorderColor').val() + "',\n" +
+          "  angleLabelsColor: '" + $('#angleLabelsColor').val() + "',\n" +
+          "}"
+
+  $('code').html(code)
+}
+
 function initAnglePresentor() {
   $('.angle-presentor').anglePresentor({
     dimensions: $('#dimensions').val(),
@@ -11,12 +31,13 @@ function initAnglePresentor() {
     maxPosibleValue: $('#maxPosibleValue').val(),
     minValue: $('#minValue').val(),
     maxValue: $('#maxValue').val(),
-    mainContainerBackgroundBorderColor: $('#mainContainerBackgroundBorderColor').val(),
+    mainContainerBorderColor: $('#mainContainerBorderColor').val(),
     mainContainerBackground: $('#mainContainerBackground').val(),
     valuePointsBackground: $('#valuePointsBackground').val(),
     valuePointsBorderColor: $('#valuePointsBorderColor').val(),
     selectedAreaBackground: $('#selectedAreaBackground').val(),
-    selectedAreaBorderColor: $('#selectedAreaBorderColor').val()
+    selectedAreaBorderColor: $('#selectedAreaBorderColor').val(),
+    angleLabelsColor: $('#angleLabelsColor').val()
   })
 }
 
@@ -24,9 +45,10 @@ $(function() {
   $('input').change(function(e) {
     $('canvas, .angle-presentor').remove()
     var form = $('.form')
-    $('<div class="angle-presentor">').appendTo($('.content'))
+    $('<div class="angle-presentor">').appendTo($('.example'))
 
     try {
+      initCodeSample()
       initAnglePresentor()
     } catch (err) {
       e.preventDefault()
@@ -37,5 +59,7 @@ $(function() {
   if (isMobile()) {
     $('#dimensions').val(200)
   }
+
+  initCodeSample()
   initAnglePresentor()
 })

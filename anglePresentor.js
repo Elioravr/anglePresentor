@@ -3,12 +3,13 @@ $.widget("custom.anglePresentor", {
     dimensions: 150,
     minPosibleValue: 0,
     maxPosibleValue: 360,
-    mainContainerBackgroundBorderColor: '#333',
+    mainContainerBorderColor: '#333',
     mainContainerBackground: '#ccc',
     valuePointsBackground: 'red',
     valuePointsBorderColor: '#333',
     selectedAreaBackground: '#777',
     selectedAreaBorderColor: '#333',
+    angleLabelsColor: 'black'
   },
   _create: function () {
     this._validateOptions()
@@ -103,7 +104,7 @@ $.widget("custom.anglePresentor", {
       fontSize = 13;
     }
 
-    this._c.fillStyle = 'black'
+    this._c.fillStyle = this.options.angleLabelsColor
     this._c.font = fontSize + 'px Arial'
     this._c.fillText(text+'°', x + labelsPadding, y + labelsPadding)
   },
