@@ -63,7 +63,7 @@ $.widget("custom.anglePresentor", {
     var dimensions = this.options.dimensions
 
     this.DIMENSIONS = dimensions
-    this.PADDING = 25
+    this.PADDING = 35
     this.BIGGEST_RADIUS = this.DIMENSIONS / 2 - this.PADDING
     this.MAX_X = this.DIMENSIONS - this.PADDING
     this.MAX_Y = this.DIMENSIONS - this.PADDING
@@ -146,6 +146,6 @@ $.widget("custom.anglePresentor", {
     return Math.sin(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_Y
   },
   _toRadians: function (angle) {
-    return angle * (Math.PI / 180);
+    return angle * (Math.PI / 180) + Math.PI / 2;
   }
 })
