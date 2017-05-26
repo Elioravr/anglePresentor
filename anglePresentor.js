@@ -52,6 +52,12 @@ $.widget("custom.anglePresentor", {
     if (parseInt(this.options.minValue) > parseInt(this.options.maxValue)) {
       throw 'anglesPresentor: You can\'t fill minValue that is bigger than the maxValue'
     }
+    if (parseInt(this.options.minValue) > 360 ||
+        parseInt(this.options.maxValue) > 360 ||
+        parseInt(this.options.minPosibleValue) > 360 ||
+        parseInt(this.options.maxPosibleValue) > 360) {
+      throw 'anglesPresentor: You can\'t fill any angle that is bigger than 360'
+    }
   },
   _initConsts: function () {
     var dimensions = this.options.dimensions
@@ -93,6 +99,8 @@ $.widget("custom.anglePresentor", {
     if (this.DIMENSIONS > 500) {
       fontSize = 25;
       labelsPadding = 25;
+    } else if (this.DIMENSIONS < 300) {
+      fontSize = 13;
     }
 
     this._c.fillStyle = 'black'
