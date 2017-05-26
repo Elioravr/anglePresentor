@@ -12,7 +12,9 @@ body {
 }
 
 .sub-title {
+  font-family: 'Raleway', sans-serif;
   font-size: 16px;
+  margin: auto;
 }
 
 input {
