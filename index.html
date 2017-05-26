@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Elioravr's Angle Presentor</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="anglePresentor.js"></script>
   <script src="index.js"></script>
+
   <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
+  <div class="form">
+    <div class="field-container">
+      <div class="label">dimensions</div>
+      <input type="number" id="dimensions" value="300">
+    </div>
+    <div class="field-container">
+      <div class="label">minPosibleValue</div>
+      <input type="number" id="minPosibleValue" value="120">
+    </div>
+    <div class="field-container">
+      <div class="label">maxPosibleValue</div>
+      <input type="number" id="maxPosibleValue" value="400">
+    </div>
+    <div class="field-container">
+      <div class="label">minValue</div>
+      <input type="number" id="minValue" value="180">
+    </div>
+    <div class="field-container">
+      <div class="label">maxValue</div>
+      <input type="number" id="maxValue" value="230">
+    </div>
+  </div>
+
   <div class="angle-presentor"></div>
 </body>
 </html>

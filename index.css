@@ -2,5 +2,26 @@ body {
   padding: 30px;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+}
+
+input {
+  width: 100px;
+  height: 30px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form .field-container {
+  margin: 0 20px;
+}
+
+@media only screen and (max-width: 1440px) {
+  body {
+    flex-direction: column;
+  }
 }

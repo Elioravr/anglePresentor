@@ -1,132 +1,27 @@
-$.widget("custom.anglePresentor", {
-  options: {
-    dimensions: 150,
-    minPosibleValue: 0,
-    maxPosibleValue: 360,
-    mainContainerBackgroundBorderColor: '#333',
-    mainContainerBackground: '#ccc',
-    valuePointsBackground: 'red',
-    valuePointsBorderColor: '#333'
-  },
-  _create: function () {
-    this._validateOptions()
-    var dimensions = this.options.dimensions
-
-    var canvasJquery = $('<canvas></canvas>')
-                   .attr('width', dimensions + 'px')
-                   .attr('height', dimensions + 'px')
-
-    this._domCanvas = canvasJquery[0]
-    this._c = this._domCanvas.getContext('2d')
-
-    this._initConsts()
-    this._initAnglesContainer()
-    this._initValueCircle(this.options.minValue)
-    this._initValueCircle(this.options.maxValue)
-
-    this.element
-      .addClass("jquery-angle-presentor")
-      .hide()
-      .after(canvasJquery)
-  },
-  _validateOptions: function () {
-    if (!this.options.minValue) {
-      throw 'anglesPresentor: You must fill minValue as an option'
-    }
-    if (!this.options.maxValue) {
-      throw 'anglesPresentor: You must fill minValue as an option'
-    }
-    if (this.options.dimensions < 100) {
-      throw 'anglesPresentor: You can\'t fill dimensions that is smaller than 100'
-    }
-    if (this.options.maxValue > this.options.maxPosibleValue) {
-      throw 'anglesPresentor: You can\'t fill maxValue that is bigger than the maxPosibleValue'
-    }
-    if (this.options.minValue < this.options.minPosibleValue) {
-      throw 'anglesPresentor: You can\'t fill minValue that is smaller than the minPosibleValue'
-    }
-    if (this.options.minValue > this.options.maxValue) {
-      throw 'anglesPresentor: You can\'t fill minValue that is bigger than the maxValue'
-    }
-  },
-  _initConsts: function () {
-    var dimensions = this.options.dimensions
-
-    this.DIMENSIONS = dimensions
-    this.PADDING = 25
-    this.BIGGEST_RADIUS = this.DIMENSIONS / 2 - this.PADDING
-    this.MAX_X = this.DIMENSIONS - this.PADDING
-    this.MAX_Y = this.DIMENSIONS - this.PADDING
-    this.CENTER_POINT_X = this.DIMENSIONS / 2
-    this.CENTER_POINT_Y = this.DIMENSIONS / 2
-  },
-  _initAnglesContainer: function () {
-    var backgroundColor = this.options.mainContainerBackground
-    var borderColor = this.options.mainContainerBorderColor
-    var x = this.CENTER_POINT_X
-    var y = this.CENTER_POINT_Y
-    var radius = this.BIGGEST_RADIUS
-    var startPoint = this._toRadians(this.options.minPosibleValue)
-    var endPoint = this._toRadians(this.options.maxPosibleValue)
-
-    this._drawCircle(backgroundColor, borderColor, x, y, radius, startPoint, endPoint)
-  },
-  _initLabels: function (x, y, text) {
-    var fontSize = 15;
-    var labelsPadding = 10;
-
-    if (this.DIMENSIONS > 500) {
-      fontSize = 25;
-      labelsPadding = 25;
-    }
-
-    this._c.fillStyle = 'black'
-    this._c.font = fontSize + 'px Arial'
-    this._c.fillText(text+'°', x + labelsPadding, y + labelsPadding)
-  },
-  _initValueCircle: function (angle) {
-    var dimensions = this.options.dimensions
-    var backgroundColor = this.options.valuePointsBackground
-    var borderColor = this.options.valuePointsBorderColor
-    var x = Math.cos(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_X
-    var y = Math.sin(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_Y
-
-    var radius = 8;
-    if (this.DIMENSIONS > 500) {
-      radius = 15;
-    }
-
-    var startPoint = this._toRadians(0)
-    var endPoint = this._toRadians(360)
-
-    this._drawCircle(backgroundColor, borderColor, x, y, radius, startPoint, endPoint)
-    this._initLabels(x, y, angle)
-  },
-  _drawCircle: function (backgroundColor, borderColor, x, y, radius, startPoint, endPoint) {
-    this._c.fillStyle = backgroundColor
-    this._c.strokeStyle = borderColor
-    this._c.beginPath();
-
-    if (startPoint !== this._toRadians(0) || endPoint !== this._toRadians(360)) {
-      this._c.moveTo(x, y);
-    }
-
-    this._c.arc(x, y, radius, startPoint, endPoint, false);
-    this._c.closePath()
-    this._c.fill();
-    this._c.stroke();
-  },
-  _toRadians: function (angle) {
-    return angle * (Math.PI / 180);
-  }
-})
+function initAnglePresentor() {
+  $('.angle-presentor').anglePresentor({
+    dimensions: $('#dimensions').val(),
+    minPosibleValue: $('#minPosibleValue').val(),
+    maxPosibleValue: $('#maxPosibleValue').val(),
+    minValue: $('#minValue').val(),
+    maxValue: $('#maxValue').val()
+  })
+}
 
 $(function() {
-  $('.angle-presentor').anglePresentor({
-    dimensions: 200,
-    minPosibleValue: 90,
-    maxPosibleValue: 320,
-    minValue: 180,
-    maxValue: 230
+  initAnglePresentor()
+  $('input').change(function(e) {
+    $('canvas, .angle-presentor').remove()
+    var form = $('.form')
+    $('<div class="angle-presentor">').appendTo($('body'))
+
+    try {
+      initAnglePresentor()
+    } catch (err) {
+      e.preventDefault()
+      alert(err)
+    }
   })
+
+  $('canvas').css('width', 300)
 })
