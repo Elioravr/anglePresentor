@@ -9,7 +9,8 @@ $.widget("custom.anglePresentor", {
     valuePointsBorderColor: '#333',
     selectedAreaBackground: '#777',
     selectedAreaBorderColor: '#333',
-    angleLabelsColor: 'black'
+    angleLabelsColor: 'black',
+    withImage: true
   },
   _create: function () {
     this._validateOptions()
@@ -27,6 +28,10 @@ $.widget("custom.anglePresentor", {
     this._initValuesAnglesContainer()
     this._initValueCircle(this.options.minValue)
     this._initValueCircle(this.options.maxValue)
+
+    if (this.options.withImage) {
+      this._drawImage()
+    }
 
     this.element
       .addClass("jquery-angle-presentor")
@@ -63,7 +68,8 @@ $.widget("custom.anglePresentor", {
   _initConsts: function () {
     var dimensions = this.options.dimensions
 
-    this.DIMENSIONS = dimensions
+    this.DIMENSIONS = parseInt(dimensions, 10)
+    this.IMAGE_SIZE = this.DIMENSIONS / 4
     this.PADDING = 35
     this.BIGGEST_RADIUS = this.DIMENSIONS / 2 - this.PADDING
     this.MAX_X = this.DIMENSIONS - this.PADDING
@@ -139,6 +145,29 @@ $.widget("custom.anglePresentor", {
     this._c.closePath()
     this._c.fill();
     this._c.stroke();
+  },
+  _drawImage: function () {
+    var img = new Image();
+
+    // move to the center of the canvas
+    this._c.translate(this.CENTER_POINT_X,this.CENTER_POINT_Y);
+
+    // rotate the canvas to the specified degrees
+    var averageValue = (parseInt(this.options.maxValue) + parseInt(this.options.minValue)) / 2
+    var imageOffset = 90
+    this._c.rotate(this._toRadians(averageValue + imageOffset));
+
+    this._c.translate(-this.CENTER_POINT_X,-this.CENTER_POINT_Y);
+
+    var self = this
+    img.onload = function() {
+      self._c.drawImage(img,
+                        (self.DIMENSIONS - self.IMAGE_SIZE) / 2,
+                        (self.DIMENSIONS - self.IMAGE_SIZE) / 2,
+                        self.IMAGE_SIZE,
+                        self.IMAGE_SIZE);
+    }
+    img.src = "images/satellite.svg";
   },
   _getXFromAngle(angle) {
     return Math.cos(this._toRadians(angle)) * this.BIGGEST_RADIUS + this.CENTER_POINT_X

@@ -19,6 +19,7 @@ function initCodeSample() {
           "  selectedAreaBackground: '" + $('#selectedAreaBackground').val() + "',\n" +
           "  selectedAreaBorderColor: '" + $('#selectedAreaBorderColor').val() + "',\n" +
           "  angleLabelsColor: '" + $('#angleLabelsColor').val() + "',\n" +
+          "  withImage: " + $('#withImage').is(':checked') + "\n" +
           "}"
 
   $('code').html(code)
@@ -26,6 +27,7 @@ function initCodeSample() {
 
 function initAnglePresentor() {
   $('.angle-presentor').anglePresentor({
+    offset: $('#offset').val(),
     dimensions: $('#dimensions').val(),
     minPosibleValue: $('#minPosibleValue').val(),
     maxPosibleValue: $('#maxPosibleValue').val(),
@@ -37,7 +39,8 @@ function initAnglePresentor() {
     valuePointsBorderColor: $('#valuePointsBorderColor').val(),
     selectedAreaBackground: $('#selectedAreaBackground').val(),
     selectedAreaBorderColor: $('#selectedAreaBorderColor').val(),
-    angleLabelsColor: $('#angleLabelsColor').val()
+    angleLabelsColor: $('#angleLabelsColor').val(),
+    withImage: $('#withImage').is(':checked')
   })
 }
 
