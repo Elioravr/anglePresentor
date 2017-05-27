@@ -68,3 +68,21 @@ pre {
   }
 }
 
+
+@media screen and (max-width: 320px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .example {
+    order: 1;
+  }
+
+  .form {
+    order: 2;
+    width: 100%;
+  }
+}
+
+

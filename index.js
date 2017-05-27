@@ -20,14 +20,13 @@ function initCodeSample() {
           "  selectedAreaBorderColor: '" + $('#selectedAreaBorderColor').val() + "',\n" +
           "  angleLabelsColor: '" + $('#angleLabelsColor').val() + "',\n" +
           "  withImage: " + $('#withImage').is(':checked') + "\n" +
-          "}"
+          "})"
 
   $('code').html(code)
 }
 
 function initAnglePresentor() {
   $('.angle-presentor').anglePresentor({
-    offset: $('#offset').val(),
     dimensions: $('#dimensions').val(),
     minPosibleValue: $('#minPosibleValue').val(),
     maxPosibleValue: $('#maxPosibleValue').val(),
